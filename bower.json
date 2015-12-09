@@ -1,0 +1,24 @@
+{
+  "name": "personal-portfolio",
+  "description": "Personal Portfolio Website for Free Code Camp",
+  "main": "app.js",
+  "authors": [
+    "Ed Gilmore"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/edgilmore/Personal-Portfolio-FCC",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {},
+  "dependencies": {
+    "bootstrap-sass": "~3.3.6",
+    "jquery": "~2.1.4"
+  }
+}
