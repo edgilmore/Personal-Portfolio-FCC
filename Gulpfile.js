@@ -10,7 +10,7 @@ var fs = require('fs');
 
 // variables
 var autoprefixerOptions = {
-    browsers: ['last 2 versions', '> 5%']
+    browsers: ['last 2 versions', '> 1%', 'ie 9']
 };
 var config = {
     filename:{
@@ -25,13 +25,13 @@ var paths = {
 };
 
 gulp.task('build:bootstrap', function() {
-    return nodesass
-        .render({file: paths.bower + 'bootstrap-sass/assets/stylesheets/_bootstrap.scss'}, function (err, result) {
-            if (err) {
-                console.log(err);
-            }
-            return fs.writeFile(paths.css + config.filename.bootstrapcss , result.css.toString());
-        });
+    nodesass.render({file: paths.bower + 'bootstrap-sass/assets/stylesheets/_bootstrap.scss', outputStyle: 'compressed'}, function (err, result) {
+        if (err) {
+            console.log(err);
+        }
+        return fs.writeFile(paths.css + config.filename.bootstrapcss , result.css.toString());
+    });
+
 });
 
 gulp.task('build:sass', function () {
@@ -46,4 +46,5 @@ gulp.task('build', ['build:bootstrap', 'build:sass'], function () {
 
 });
 gulp.task('default', function () {
+    gulp.start('build');
 });
