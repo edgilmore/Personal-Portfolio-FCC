@@ -7,6 +7,7 @@ var sass = require('gulp-sass');
 var nodesass = require('node-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var fs = require('fs');
+var livereload = require('gulp-livereload');
 
 // variables
 var autoprefixerOptions = {
@@ -42,8 +43,9 @@ gulp.task('build:sass', function () {
         .pipe(gulp.dest(paths.css));
 });
 
-gulp.task('build', ['build:bootstrap', 'build:sass'], function () {
-
+gulp.task('build', ['build:bootstrap', 'build:sass'], function (){
+    livereload.listen();
+    gulp.watch(paths.sass + '**/*.scss', ['build:sass']);
 });
 gulp.task('default', function () {
     gulp.start('build');
