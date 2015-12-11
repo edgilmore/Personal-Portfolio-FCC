@@ -15,23 +15,35 @@ var autoprefixerOptions = {
 };
 var config = {
     filename:{
-        bootstrapcss: 'bootstrap.css'
+        bootstrapcss: 'bootstrap.css',
+        bootstrapjs: 'bootstrap.js'
     }
 };
 var paths = {
     bower: './bower_components/',
     sass: './app/css/sass/',
     css: './app/css/',
-    js: './app/js/'
+    js: './app/js/',
+    fonts: './app/fonts/'
 };
 
 gulp.task('build:bootstrap', function() {
+    //compile and move sass
     nodesass.render({file: paths.bower + 'bootstrap-sass/assets/stylesheets/_bootstrap.scss', outputStyle: 'compressed'}, function (err, result) {
         if (err) {
             console.log(err);
         }
         return fs.writeFile(paths.css + config.filename.bootstrapcss , result.css.toString());
     });
+    //move javascript
+    gulp.src([paths.bower + 'bootstrap-sass/assets/javascripts/bootstrap.min.js', paths.bower + 'jquery/dist/jquery.min.js'])
+        .pipe(gulp.dest(paths.js +'/vendor/'));
+    //move fonts
+    gulp.src(paths.bower + 'bootstrap-sass/assets/fonts/bootstrap/*.*')
+        .pipe(gulp.dest(paths.fonts));
+});
+
+gulp.task('build:font-awesome', function () {
 
 });
 
