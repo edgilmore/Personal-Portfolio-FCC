@@ -56,7 +56,10 @@ gulp.task('build:sass', function () {
 });
 
 gulp.task('build', ['build:bootstrap', 'build:sass'], function (){
-    livereload.listen();
+    gulp.start('build:watch');
+});
+
+gulp.task('build:watch', function(){
     gulp.watch(paths.sass + '**/*.scss', ['build:sass']);
 });
 gulp.task('default', function () {
