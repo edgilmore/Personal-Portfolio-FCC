@@ -7,7 +7,6 @@ var sass = require('gulp-sass');
 var nodesass = require('node-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var fs = require('fs');
-var livereload = require('gulp-livereload');
 
 // variables
 var autoprefixerOptions = {
@@ -16,7 +15,8 @@ var autoprefixerOptions = {
 var config = {
     filename:{
         bootstrapcss: 'bootstrap.css',
-        bootstrapjs: 'bootstrap.js'
+        bootstrapjs: 'bootstrap.js',
+        stylesheet: 'stylesheet.min.css'
     }
 };
 var paths = {
