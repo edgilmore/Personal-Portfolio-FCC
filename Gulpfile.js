@@ -4,9 +4,12 @@
 'use strict';
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var gutil = require('gulp-util');
 var nodesass = require('node-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var fs = require('fs');
+var webpack = require('webpack');
+var WebpackDevServer = require('webpack-dev-server');
 
 // variables
 var autoprefixerOptions = {
@@ -65,8 +68,33 @@ gulp.task('build:sass', function () {
         .pipe(gulp.dest(paths.css));
 });
 
-gulp.task('build', ['build:bootstrap', 'build:sass', 'build:font-awesome', 'build:move-fonts', 'build:move-javascript'], function () {
+gulp.task('build:webpack', function () {
+    webpack({}, function (err, stats) {
+        if (err) {
+            throw new gutil.PluginError('webpack', err);
+        }
+        gutil.log('[webpack]', stats.toString({
+            //output options
+        }));
+        callback();
+    });
+});
+
+gulp.task('webpack-dev-server', function () {
+    var compiler = webpack({
+        //configuration
+    });
+    new WebpackDevServer(compiler, {}).listen('8080', 'localhost', function (err) {
+        if (err) {
+            throw new gutil.PluginError('webpack-dev-server', err);
+        }
+        gutil.log('[webpack-dev-server]', 'http://localhost:8080/webpack-dev-server/index.html');
+    });
+});
+
+gulp.task('build', ['build:bootstrap', 'build:sass', 'build:font-awesome', 'build:move-fonts', 'build:move-javascript', 'build:webpack'], function () {
     gulp.start('build:watch');
+    gulp.start('build:webpack-dev-server');
 });
 
 gulp.task('build:watch', function(){
