@@ -2,8 +2,7 @@
   "name": "personal-portfolio",
   "version": "0.0.1",
   "dependencies": {
-    "bower": "",
-    "browserify": "^12.0.1"
+    "bower": ""
   },
   "description": "Personal Portfolio Website for Free Code Camp",
   "main": "app.js",
@@ -15,7 +14,7 @@
     "url": "git+https://github.com/edgilmore/Personal-Portfolio-FCC.git"
   },
   "author": "Ed Gilmore",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/edgilmore/Personal-Portfolio-FCC/issues"
   },
