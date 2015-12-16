@@ -35,9 +35,6 @@ gulp.task('build:bootstrap', function() {
         }
         return fs.writeFile(paths.css + config.filename.bootstrapcss , result.css.toString());
     });
-    //move javascript
-    gulp.src([paths.bower + 'bootstrap-sass/assets/javascripts/bootstrap.min.js', paths.bower + 'jquery/dist/jquery.min.js'])
-        .pipe(gulp.dest(paths.js +'/vendor/'));
 });
 
 gulp.task('build:font-awesome', function () {
@@ -47,13 +44,17 @@ gulp.task('build:font-awesome', function () {
 });
 
 gulp.task('build:move-fonts', function () {
-    //move fonts
     //font-awesome
     gulp.src(paths.bower + 'font-awesome/fonts/*.*')
         .pipe(gulp.dest(paths.fonts));
     //bootstrap
     gulp.src(paths.bower + 'bootstrap-sass/assets/fonts/bootstrap/*.*')
         .pipe(gulp.dest(paths.fonts));
+});
+
+gulp.task('build:move-javascript', function () {
+    gulp.src([paths.bower + 'bootstrap-sass/assets/javascripts/bootstrap.min.js', paths.bower + 'jquery/dist/jquery.min.js'])
+        .pipe(gulp.dest(paths.js + '/vendor/'));
 });
 
 gulp.task('build:sass', function () {
@@ -64,7 +65,7 @@ gulp.task('build:sass', function () {
         .pipe(gulp.dest(paths.css));
 });
 
-gulp.task('build', ['build:bootstrap', 'build:sass', 'build:font-awesome', 'build:move-fonts'], function () {
+gulp.task('build', ['build:bootstrap', 'build:sass', 'build:font-awesome', 'build:move-fonts', 'build:move-javascript'], function () {
     gulp.start('build:watch');
 });
 
